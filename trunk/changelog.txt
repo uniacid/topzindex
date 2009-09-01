@@ -1,0 +1,13 @@
+TopZIndex plugin for jQuery
+Copyright © 2009 Todd Northrop
+http://www.speednet.biz/
+
+Last updated September 1, 2009
+
+____________________________
+Version 1.0 (2009-09-01)
+	
+	Initial release.
+
+
+__
