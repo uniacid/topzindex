@@ -52,7 +52,7 @@ $.topZIndex = function (selector) {
 			return isNaN(v = parseInt($(v).css("z-index")))? null : v;
 		}
 	)));
-}
+};
 
 $.fn.topZIndex = function (opt) {
 	/// <summary>
@@ -84,7 +84,7 @@ $.fn.topZIndex = function (opt) {
 	return this.each(function () {
 		$(this).css("z-index", zmax += inc);
 	});
-}
+};
 
 })(jQuery);
 
