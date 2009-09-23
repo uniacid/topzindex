@@ -1,11 +1,13 @@
 /*	
 	TopZIndex plugin for jQuery
-	Version: 1.0
+	Version: 1.1
+
+	http://topzindex.googlecode.com/
 	
 	Copyright (c) 2009 Todd Northrop
 	http://www.speednet.biz/
 	
-	September 1, 2009
+	September 23, 2009
 	
 	Calculates the highest CSS z-index value in the current document
 	or specified set of elements.  Provides ability to push one or more
@@ -40,16 +42,16 @@ $.topZIndex = function (selector) {
 	/// 	(minimum value returned: 0).
 	/// </summary>	
 	/// <param name="selector" type="String" optional="true">
-	/// 	(optional, default = "*") jQuery selector specifying the elements
-	/// 	to use for calculating the highest zIndex.
+	/// 	(optional, default = "body *") jQuery selector specifying
+	/// 	the elements to use for calculating the highest zIndex.
 	/// </param>
 	/// <returns type="Number">
 	/// 	The minimum number returned is 0 (zero).
 	/// </returns>
 	
-	return Math.max(0, Math.max.apply(null, $.map($(selector || "*"), 
+	return Math.max(0, Math.max.apply(null, $.map($(selector || "body *"), 
 		function (v) {
-			return isNaN(v = parseInt($(v).css("z-index")))? null : v;
+			return parseInt($(v).css("z-index")) || null;
 		}
 	)));
 };
@@ -65,7 +67,7 @@ $.fn.topZIndex = function (opt) {
 	/// 	(optional) Options, with the following possible values:
 	/// 	increment: (Number, default = 1) increment value added to the
 	/// 		highest z-index number to bring an element to the top.
-	/// 	selector: (String, default = "*") jQuery selector specifying
+	/// 	selector: (String, default = "body *") jQuery selector specifying
 	/// 		the elements to use for calculating the highest zIndex.
 	/// </param>
 	/// <returns type="jQuery" />
@@ -75,7 +77,7 @@ $.fn.topZIndex = function (opt) {
 		return this;
 	}
 	
-	opt = $.extend({increment: 1, selector: "*"}, opt);
+	opt = $.extend({increment: 1, selector: "body *"}, opt);
 
 	// Get the highest current z-index value
 	var zmax = $.topZIndex(opt.selector), inc = opt.increment;
