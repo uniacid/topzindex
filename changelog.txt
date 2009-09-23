@@ -1,4 +1,6 @@
 TopZIndex plugin for jQuery
+http://topzindex.googlecode.com/
+
 Copyright © 2009 Todd Northrop
 http://www.speednet.biz/
 

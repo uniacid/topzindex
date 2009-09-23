@@ -1,8 +1,10 @@
 TopZIndex plugin for jQuery
+http://topzindex.googlecode.com/
+
 Copyright © 2009 Todd Northrop
 http://www.speednet.biz/
 
-Last updated September 1, 2009
+Last updated September 23, 2009
 
 Calculates the highest CSS z-index value in the current document
 or specified set of elements.  Provides ability to push one or more
