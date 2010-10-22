@@ -1,13 +1,13 @@
 /*	
 	TopZIndex plugin for jQuery
-	Version: 1.1
+	Version: 1.2
 
 	http://topzindex.googlecode.com/
 	
-	Copyright (c) 2009 Todd Northrop
+	Copyright (c) 2009-2011 Todd Northrop
 	http://www.speednet.biz/
 	
-	September 23, 2009
+	October 21, 2010
 	
 	Calculates the highest CSS z-index value in the current document
 	or specified set of elements.  Provides ability to push one or more
@@ -42,16 +42,16 @@ $.topZIndex = function (selector) {
 	/// 	(minimum value returned: 0).
 	/// </summary>	
 	/// <param name="selector" type="String" optional="true">
-	/// 	(optional, default = "body *") jQuery selector specifying
+	/// 	(optional, default = "*") jQuery selector specifying
 	/// 	the elements to use for calculating the highest zIndex.
 	/// </param>
 	/// <returns type="Number">
 	/// 	The minimum number returned is 0 (zero).
 	/// </returns>
 	
-	return Math.max(0, Math.max.apply(null, $.map($(selector || "body *"), 
+	return Math.max(0, Math.max.apply(null, $.map(((selector || "*") === "*")? $.makeArray(document.getElementsByTagName("*")) : $(selector),
 		function (v) {
-			return parseInt($(v).css("z-index")) || null;
+			return parseFloat($(v).css("z-index")) || null;
 		}
 	)));
 };
@@ -67,7 +67,7 @@ $.fn.topZIndex = function (opt) {
 	/// 	(optional) Options, with the following possible values:
 	/// 	increment: (Number, default = 1) increment value added to the
 	/// 		highest z-index number to bring an element to the top.
-	/// 	selector: (String, default = "body *") jQuery selector specifying
+	/// 	selector: (String, default = "*") jQuery selector specifying
 	/// 		the elements to use for calculating the highest zIndex.
 	/// </param>
 	/// <returns type="jQuery" />
@@ -77,14 +77,15 @@ $.fn.topZIndex = function (opt) {
 		return this;
 	}
 	
-	opt = $.extend({increment: 1, selector: "body *"}, opt);
+	opt = $.extend({increment: 1}, opt);
 
 	// Get the highest current z-index value
-	var zmax = $.topZIndex(opt.selector), inc = opt.increment;
+	var zmax = $.topZIndex(opt.selector),
+		inc = opt.increment;
 
 	// Increment the z-index of each element in the matched set to the next highest number
 	return this.each(function () {
-		$(this).css("z-index", zmax += inc);
+		this.style.zIndex = (zmax += inc);
 	});
 };
 
